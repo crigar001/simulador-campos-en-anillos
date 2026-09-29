@@ -1,4 +1,5 @@
-revisa el codigo aun no me sale nada <!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -6,15 +7,7 @@ revisa el codigo aun no me sale nada <!DOCTYPE html><html lang="en">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..700&display=swap" rel="stylesheet">
-<script type="importmap">
-{
-  "imports": {
-    "three": "https://unpkg.com/three@0.158.0/build/three.module.js"
-  }
-}
-</script>
 <style>
-/* ===== TODO EL CSS ORIGINAL ===== */
 :root {
   --page: #0c0c0c; --panel: #171716; --panel-2: #20201e; --well: #111110; --edge: #2e2d2a;
   --ink: #e9e6df; --ink-soft: #9a968c; --ink-faint: #66635c; --tick: #57544d; --tick-soft: #3a3935;
@@ -45,14 +38,18 @@ button, input { font: inherit; color: inherit; }
 .panel { position: relative; background: var(--panel); min-width: 0; min-height: 0;
   clip-path: polygon(0 0, calc(100% - var(--cut)) 0, 100% var(--cut), 100% 100%, var(--cut) 100%, 0 calc(100% - var(--cut))); }
 .cap { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; padding: 8px 14px 7px; font-size: 11.5px; color: var(--ink-soft); font-stretch: 80%; letter-spacing: 0.02em; border-bottom: 1px solid var(--edge); }
-.cap b { color: var(--ink); font-weight: 600; font-stretch: 85%; font-size: 12px; }header { grid-area: head; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 16px; padding: 0 16px; }
+.cap b { color: var(--ink); font-weight: 600; font-stretch: 85%; font-size: 12px; }
+
+header { grid-area: head; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 16px; padding: 0 16px; }
 header h1 { margin: 0; font-size: 17px; font-weight: 650; font-stretch: 72%; letter-spacing: 0.03em; }
 header h1 span { color: var(--ink-faint); font-weight: 400; margin-left: 8px; font-size: 12px; letter-spacing: 0.01em; }
 .status { display: flex; align-items: center; gap: 10px; font-size: 13.5px; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .status span { overflow: hidden; text-overflow: ellipsis; }
 .led { width: 9px; height: 9px; flex: none; background: var(--ink-faint); clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%); }
 .led.live { background: var(--acc); } .led.warm { background: var(--warn); }
-.clock { font-size: 12px; color: var(--ink-soft); font-stretch: 80%; }.view { grid-area: view; background: var(--scene); }
+.clock { font-size: 12px; color: var(--ink-soft); font-stretch: 80%; }
+
+.view { grid-area: view; background: var(--scene); }
 #view3d { position: absolute; inset: 0; }
 #view3d canvas { display: block; width: 100%; height: 100%; touch-action: none; cursor: grab; }
 #view3d canvas.dragging { cursor: grabbing; }
@@ -79,7 +76,9 @@ header h1 span { color: var(--ink-faint); font-weight: 400; margin-left: 8px; fo
 .toast { position: absolute; left: 50%; top: 56px; transform: translateX(-50%); background: #e9e6df; color: #141414; padding: 6px 14px; font-size: 12.5px; opacity: 0; transition: opacity .2s; pointer-events: none;
   clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%); }
 .toast.show { opacity: 1; }
-.loading { position: absolute; inset: 0; display: grid; place-items: center; color: #8f8c83; }.rack { grid-area: rack; overflow: auto; }
+.loading { position: absolute; inset: 0; display: grid; place-items: center; color: #8f8c83; }
+
+.rack { grid-area: rack; overflow: auto; }
 .grp { padding: 10px 14px 12px; border-bottom: 1px solid var(--edge); }
 .grp:last-child { border-bottom: 0; }
 .gh { display: flex; justify-content: space-between; align-items: baseline; margin: 0 0 8px; font-size: 12px; font-weight: 600; font-stretch: 85%; }
@@ -105,7 +104,9 @@ header h1 span { color: var(--ink-faint); font-weight: 400; margin-left: 8px; fo
 .btn .led { width: 7px; height: 7px; }
 .btn[aria-pressed="true"] .led { background: var(--acc); }
 .btn:hover, .cell:hover { filter: brightness(1.15); }
-.btn:active { transform: translateY(1px); }.dial { margin-top: 11px; }
+.btn:active { transform: translateY(1px); }
+
+.dial { margin-top: 11px; }
 .dial .lab { display: flex; justify-content: space-between; font-size: 12px; color: var(--ink-soft); }
 .dial .lab output { color: var(--ink); background: var(--well); padding: 0 6px; min-width: 58px; text-align: right; clip-path: polygon(5px 0, 100% 0, 100% 100%, 0 100%, 0 5px); }
 input.rule { -webkit-appearance: none; appearance: none; display: block; width: 100%; height: 24px; margin: 3px 0 0; background: transparent; cursor: pointer; --a: 0%; --b: 50%; }
@@ -124,7 +125,9 @@ input.rule::-moz-range-thumb { width: 13px; height: 24px; background: var(--ink)
 input.rule:focus-visible { outline: none; }
 input.rule:focus-visible::-webkit-slider-thumb { background: var(--focus); }
 input.rule:focus-visible::-moz-range-thumb { background: var(--focus); }
-.scale { display: flex; justify-content: space-between; font-size: 9.5px; color: var(--ink-faint); margin-top: 2px; }.read { grid-area: read; display: flex; flex-direction: column; overflow: auto; }
+.scale { display: flex; justify-content: space-between; font-size: 9.5px; color: var(--ink-faint); margin-top: 2px; }
+
+.read { grid-area: read; display: flex; flex-direction: column; overflow: auto; }
 .meter { padding: 4px 16px 0; }
 .meter svg { width: 100%; max-width: 250px; margin: 0 auto; display: block; }
 .vals { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--edge); }
@@ -139,9 +142,13 @@ input.rule:focus-visible::-moz-range-thumb { background: var(--focus); }
 .vals .v small { font-size: 13px; color: var(--ink-soft); margin-left: 3px; font-weight: 400; }
 .vals .x { font-size: 10.5px; color: var(--ink-faint); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .hot { display: none; font-size: 10px; background: var(--warn); color: #141414; padding: 0 5px; clip-path: polygon(4px 0, 100% 0, calc(100% - 4px) 100%, 0 100%); }
-.hot.on { display: inline-block; }.scope { grid-area: scope; } .lam { grid-area: lam; }
+.hot.on { display: inline-block; }
+
+.scope { grid-area: scope; } .lam { grid-area: lam; }
 .plot { position: absolute; left: 0; right: 0; top: 30px; bottom: 0; }
-.plot canvas { width: 100%; height: 100%; display: block; }@media (max-width: 1180px) {
+.plot canvas { width: 100%; height: 100%; display: block; }
+
+@media (max-width: 1180px) {
   .app { height: auto; grid-template-columns: minmax(0, 1fr) 140px 280px; grid-template-rows: 42px minmax(560px, 66vh) 210px auto;
     grid-template-areas: "head head head" "view view rack" "scope lam lam" "read read read"; }
   .vcap, .hint { display: none; }
@@ -164,12 +171,13 @@ input.rule:focus-visible::-moz-range-thumb { background: var(--focus); }
   .cbar { width: calc(100% - 48px); }
 }
 @media (prefers-reduced-motion: reduce) { .toast { transition: none; } }
-</style></head>
+</style>
+</head>
 <body>
 <div class="app">
   <header class="panel">
     <h1>Induction bench<span>magnet, coil and field, computed live</span></h1>
-    <div class="status" aria-live="polite"><i class="led" id="dot"></i><span id="status"></span></div>
+    <div class="status" aria-live="polite"><i class="led" id="dot"></i><span id="status">Loading…</span></div>
     <div class="clock" id="clock"></div>
   </header>
 
@@ -221,13 +229,13 @@ input.rule:focus-visible::-moz-range-thumb { background: var(--focus); }
   </aside>
 
   <main class="view panel" aria-label="Three dimensional view">
-    <div id="view3d"><div class="loading" id="loading">Tracing field lines</div></div>
+    <div id="view3d"><div class="loading" id="loading">Loading Three.js…</div></div>
     <div class="brackets" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-    <div class="vcap"><b>Fig. 1</b>  <span id="vcapTxt">Field of the magnet and coil, horizontal plane through the axis</span></div>
+    <div class="vcap"><b>Fig. 1</b>&nbsp; <span id="vcapTxt">Field of the magnet and coil, horizontal plane through the axis</span></div>
     <div class="views" role="group" aria-label="Camera view">
       <button data-view="oblique" aria-pressed="true">Angled</button><button data-view="side" aria-pressed="false">Side</button><button data-view="top" aria-pressed="false">Top</button><button data-view="axis" aria-pressed="false">Along axis</button>
     </div>
-    <div class="cbar" aria-hidden="true"><div class="ttl"><b>|B|</b>  field strength, log scale</div><div class="bar"></div><div class="tks" id="bar"></div></div>
+    <div class="cbar" aria-hidden="true"><div class="ttl"><b>|B|</b>&nbsp; field strength, log scale</div><div class="bar"></div><div class="tks" id="bar"></div></div>
     <div class="hint">drag magnet to move, drag space to orbit, scroll to zoom</div>
     <div class="toast" id="toast" role="status"></div>
   </main>
@@ -254,24 +262,32 @@ input.rule:focus-visible::-moz-range-thumb { background: var(--focus); }
   </section>
 
   <section class="scope panel" aria-label="Oscilloscope">
-    <div class="cap"><b>Fig. 2  Oscilloscope</b><span id="capScope">CH1 induced EMF, CH2 induced current</span></div>
+    <div class="cap"><b>Fig. 2&nbsp; Oscilloscope</b><span id="capScope">CH1 induced EMF, CH2 induced current</span></div>
     <div class="plot"><canvas id="scope" aria-label="Induced voltage and current over the last five seconds"></canvas></div>
   </section>
   <section class="lam panel" aria-label="Flux linkage against position">
-    <div class="cap"><b id="capLam">Fig. 3  Flux linkage Λ<span class="long"> against magnet position</span></b><span class="long" id="capLamR">EMF = −slope × speed</span></div>
+    <div class="cap"><b id="capLam">Fig. 3&nbsp; Flux linkage Λ<span class="long"> against magnet position</span></b><span class="long" id="capLamR">EMF = −slope × speed</span></div>
     <div class="plot"><canvas id="lam" aria-label="Flux linkage against magnet position, with the slope at the magnet"></canvas></div>
   </section>
 </div>
 
-<script type="module">
-import * as THREE from "three";
+<!-- Three.js UMD (global THREE). No ES modules → works with file:// in most browsers -->
+<script src="https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js"></script>
+<script>
+(function () {
+  "use strict";
+  if (typeof THREE === "undefined") {
+    var el = document.getElementById("loading");
+    if (el) el.textContent = "Could not load Three.js. Check internet / CDN and reload.";
+    document.getElementById("status").textContent = "Three.js failed to load";
+    return;
+  }
 
 /* =====================================================================
    PHYSICS (SI units). Verified against brute force Biot Savart sums.
    ===================================================================== */
 const MU0 = 1.25663706212e-6, PI = Math.PI;
 
-// Bulirsch cel, as given in Derby and Olbert, Am. J. Phys. 78, 229 (2010)
 function cel(kc, p, c, s) {
   if (kc === 0) return NaN;
   const errtol = 1e-9;
@@ -288,7 +304,6 @@ function ellipKE(m) {
   for (let i = 0; i < 30; i++) { const an = (a + b) / 2, bn = Math.sqrt(a * b), cn = (a - b) / 2; pow *= 2; c2sum += pow * cn * cn; a = an; b = bn; if (Math.abs(cn) < 1e-15 * a) break; }
   const K = PI / (2 * a); return [K, K * (1 - c2sum)];
 }
-// Uniformly magnetized cylinder: [B_rho, B_z] in its own frame
 function magnetField(rho, z, a, b, Br) {
   const B0 = Br / PI; if (rho < 1e-12 * a) rho = 1e-12 * a;
   const zp = z + b, zm = z - b, ap = a + rho, am = a - rho;
@@ -300,7 +315,6 @@ function magnetField(rho, z, a, b, Br) {
   const Bz = (B0 * a / ap) * (zp / sp * cel(kp, gam * gam, 1, gam) - zm / sm * cel(km, gam * gam, 1, gam));
   return [Brho, Bz];
 }
-// Current loop vector potential A_phi and field
 function loopA(rho, z, R, I) {
   if (rho < 1e-9 * R) { const d = R * R + z * z; return MU0 * I * R * R * rho / (4 * d * Math.sqrt(d)); }
   const q = (R + rho) * (R + rho) + z * z, m = 4 * R * rho / q; const [K, E] = ellipKE(m);
@@ -329,7 +343,6 @@ function perpBasis(n) {
   return [u, [n[1] * u[2] - n[2] * u[1], n[2] * u[0] - n[0] * u[2], n[0] * u[1] - n[1] * u[0]]];
 }
 function makeQuad(nz, nphi) { const gl = gaussLegendre(nz), cs = [], sn = []; for (let j = 0; j < nphi; j++) { cs.push(Math.cos(2 * PI * j / nphi)); sn.push(Math.sin(2 * PI * j / nphi)); } return { gl, cs, sn, nphi }; }
-// Flux linkage of the coil from the magnet, by reciprocity (see notes at the end of the file)
 function fluxLinkage(mag, coil, quad) {
   const M = mag.Br / MU0, [u, v] = perpBasis(mag.axis), n = coil.axis, { gl, cs, sn, nphi } = quad;
   let total = 0;
@@ -359,7 +372,6 @@ function coilLoops(rIn, rOut, halfLen, nz, nr) {
   for (let i = 0; i < nz; i++) for (let j = 0; j < nr; j++) loops.push({ z: gz.x[i] * halfLen, r: (rIn + rOut) / 2 + gr.x[j] * (rOut - rIn) / 2, w: gz.w[i] * gr.w[j] / 4 });
   return loops;
 }
-// Meridional field line tracer, mirrored across z = 0
 function traceMeridional(fieldFn, rho0, rhoCut, hFn, rMax) {
   const pts = [[rho0, 0]]; let r = rho0, z = 0, closed = false;
   const dir = (rr, zz) => { const [a, b] = fieldFn(Math.abs(rr), zz); const s = rr < 0 ? -1 : 1; const l = Math.hypot(a, b) || 1; return [s * a / l, b / l]; };
@@ -382,28 +394,23 @@ function equalFluxRadii(BzFn, rhoEdge, nRings) {
   return { radii, total };
 }
 
-/* =====================================================================
-   APPARATUS
-   ===================================================================== */
-// Magnet materials: remanence Br and density. Values are typical datasheet figures.
 const MAGNETS = {
   n52: { sym: 'N52', nm: 'NdFeB', name: 'Neodymium iron boron, N52', Br: 1.44, rho: 7500 },
   n42: { sym: 'N42', nm: 'NdFeB', name: 'Neodymium iron boron, N42', Br: 1.30, rho: 7500 },
   smco: { sym: 'SmCo', nm: 'Sm₂Co₁₇', name: 'Samarium cobalt', Br: 1.10, rho: 8400 },
   fer: { sym: 'C8', nm: 'Ferrite', name: 'Strontium ferrite, C8', Br: 0.39, rho: 4900 }
 };
-// Wire materials: resistivity at 20 C
 const WIRES = {
   cu: { sym: 'Cu', nm: 'Copper', rho: 1.68e-8, color: 0xc27a45, metal: 1 },
   ag: { sym: 'Ag', nm: 'Silver', rho: 1.59e-8, color: 0xd9dde2, metal: 1 },
   al: { sym: 'Al', nm: 'Aluminium', rho: 2.65e-8, color: 0xb3bac3, metal: 1 },
   nicr: { sym: 'NiCr', nm: 'Nichrome', rho: 1.10e-6, color: 0x8b8c8f, metal: 0.8 }
 };
-const MAGNET = { a: 0.006, b: 0.0125, Br: 1.30, rho: 7500 };   // cylinder 12 mm across, 25 mm long
+const MAGNET = { a: 0.006, b: 0.0125, Br: 1.30, rho: 7500 };
 const BOBBIN = { bore: 0.015, rIn: 0.016, halfLen: 0.006, flange: 0.001 };
-const WIRE_D = 0.5e-3;          // copper wire diameter, m
-const R_METER = 1.0;            // current meter in series, ohm
-const TRACK = 0.15, SWING = 0.12, S = 100; // metres; render scale 1 unit = 1 cm
+const WIRE_D = 0.5e-3;
+const R_METER = 1.0;
+const TRACK = 0.15, SWING = 0.12, S = 100;
 const magMoment = () => Math.max(MAGNET.Br, 0.05) / MU0 * PI * MAGNET.a * MAGNET.a * 2 * MAGNET.b;
 
 const state = {
@@ -423,22 +430,12 @@ function buildCoil() {
   const rOut = BOBBIN.rIn + depth, rMean = BOBBIN.rIn + depth / 2;
   const R = WIRES[state.wire].rho * state.N * 2 * PI * rMean / (PI * WIRE_D * WIRE_D / 4);
   const inch = 0.0254, rI = rMean / inch, lI = 2 * BOBBIN.halfLen / inch, dI = depth / inch;
-  const L = 0.8 * rI * rI * state.N * state.N / (6 * rI + 9 * lI + 10 * dI) * 1e-6; // Wheeler multilayer
+  const L = 0.8 * rI * rI * state.N * state.N / (6 * rI + 9 * lI + 10 * dI) * 1e-6;
   coil = { perLayer, layers, depth, rOut, rMean, R, L,
     loops: coilLoops(BOBBIN.rIn, rOut, BOBBIN.halfLen, 4, depth > 0.004 ? 3 : 2),
     traceLoops: coilLoops(BOBBIN.rIn, rOut, BOBBIN.halfLen, 2, 2) };
   coreCoil();
 }
-/* ---------------------------------------------------------------------
-   IRON CORE. A soft iron rod in the bore, 27 mm across and 40 mm long.
-   Approximation: the rod is magnetized uniformly along the coil axis, with
-     J = mu0 M = chi_eff * (average applied axial field), capped at Bs.
-   chi_eff = chi / (1 + N chi), with N the rod's demagnetizing factor,
-   computed from the exact field of a uniformly magnetized cylinder.
-   Forces and EMF come from one co-energy, so they stay consistent:
-     W' = I Lambda_m(s) + (V / 2 mu0) chi_eff (Bm(s) + beta I)^2
-   Laminated iron is assumed, so the core carries no eddy currents.
-   --------------------------------------------------------------------- */
 const IRON = { rc: 0.0135, h: 0.02, chi: 5000, Bs: 2.0 };
 const core = (() => {
   const ga = gaussLegendre(6), gr = gaussLegendre(4), pts = []; let ws = 0;
@@ -449,7 +446,7 @@ const core = (() => {
   const cs = [], sn = []; for (let k = 0; k < 8; k++) { cs.push(Math.cos(PI * k / 4)); sn.push(Math.sin(PI * k / 4)); }
   return { pts, Nd, chiE, V: PI * IRON.rc * IRON.rc * 2 * IRON.h, cs, sn, beta: 0, K: 0, Ladd: 0 };
 })();
-function coreCoil() {   // average coil field per amp over the rod, and the rod's flux through the coil per tesla
+function coreCoil() {
   let beta = 0; for (const [z, r, w] of core.pts) { let b = 0; for (const L of coil.loops) b += loopB(r, z - L.z, L.r, state.N * L.w)[1]; beta += w * b; }
   core.beta = beta; core.K = core.V * beta / MU0; core.Ladd = core.K * core.chiE * beta;
 }
@@ -458,7 +455,7 @@ function magB(px, py, pz, ms, m, out) {
   const f = magnetField(rho, z, MAGNET.a, MAGNET.b, MAGNET.Br), ir = rho > 1e-12 ? f[0] / rho : 0;
   out[0] = ir * rx + f[1] * m[0]; out[1] = ir * ry + f[1] * m[1]; out[2] = ir * rz + f[1] * m[2];
 }
-function coreBm(s, psi, th) {   // magnet field along the coil axis, averaged over the rod
+function coreBm(s, psi, th) {
   const n = coilAxis(th), [u, v] = perpBasis(n), m = magAxis(psi), B = [0, 0, 0]; let sum = 0;
   for (const [z, r, w] of core.pts) for (let k = 0; k < 8; k++) {
     const c = core.cs[k] * r, q = core.sn[k] * r;
@@ -468,7 +465,6 @@ function coreBm(s, psi, th) {   // magnet field along the coil axis, averaged ov
   return sum;
 }
 const coreJ = (Bm, I) => { const j = core.chiE * (Bm + core.beta * I); return Math.max(-IRON.Bs, Math.min(IRON.Bs, j)); };
-
 const magAxis = (psi) => [Math.cos(psi), 0, -Math.sin(psi)];
 const coilAxis = (th) => [Math.cos(th), 0, -Math.sin(th)];
 const magnetMass = () => MAGNET.rho * PI * MAGNET.a * MAGNET.a * 2 * MAGNET.b;
@@ -480,15 +476,14 @@ function innerTurnFlux(s, psi, th) {
   return fluxLinkage({ pos: [s, 0, 0], axis: magAxis(psi), a: MAGNET.a, b: MAGNET.b, Br: MAGNET.Br },
     { pos: [0, 0, 0], axis: coilAxis(th), N: 1, loops: [{ r: BOBBIN.rIn, z: 0, w: 1 }] }, quad);
 }
-
-// Collision between the magnet and the coil body, by sampling both surfaces
 const colSamples = (() => {
   const pts = [];
   for (let i = 0; i <= 10; i++) for (let j = 0; j < 24; j++) { const t = 2 * PI * j / 24; pts.push([-1 + 2 * i / 10, Math.cos(t), Math.sin(t), 1]); }
   for (const e of [-1, 1]) for (const f of [0.35, 0.7]) for (let j = 0; j < 12; j++) { const t = 2 * PI * j / 12; pts.push([e, Math.cos(t), Math.sin(t), f]); }
   return pts;
 })();
-function collides(s, psi, th, coreOn = state.core) {
+function collides(s, psi, th, coreOn) {
+  if (coreOn === undefined) coreOn = state.core;
   const m = magAxis(psi), n = coilAxis(th), [u, v] = perpBasis(m);
   const zLim = BOBBIN.halfLen + BOBBIN.flange + 0.0005, rLo = BOBBIN.bore - 0.0005, rHi = coil.rOut + 0.002;
   for (const p of colSamples) {
@@ -510,7 +505,6 @@ function collides(s, psi, th, coreOn = state.core) {
   }
   return false;
 }
-// How far the magnet can swing from its home side before touching the coil
 const freeCache = new Map();
 function freeEnd(side, th, psi) {
   const coreOn = state.core || state.corePending, key = side + '|' + (th * 180 / PI).toFixed(1) + '|' + psi.toFixed(3) + '|' + state.N + '|' + coreOn;
@@ -526,11 +520,6 @@ function swingRange() {
   const inner = side < 0 ? Math.min(e1, e2) : Math.max(e1, e2);
   return side < 0 ? [-SWING, Math.max(inner, -SWING + 0.02)] : [Math.min(inner, SWING - 0.02), SWING];
 }
-
-/* =====================================================================
-   FLUX TABLE along the track: exact values, cubic interpolation for
-   dLambda/ds at every substep. Rebuilt when the coil or magnet turns.
-   ===================================================================== */
 const TAB = { key: null, vals: new Float64Array(301), n: 0, x0: -0.15, h: 0.001, N: 301 };
 const tabKey = () => state.mat + '|' + state.N + '|' + state.psi.toFixed(4) + '|' + state.theta.toFixed(4);
 const TABM = { vals: new Float64Array(301), n: 0, x0: -0.15, h: 0.001, N: 301 };
@@ -541,38 +530,28 @@ function fillTable(budgetMs) {
   while (TAB.n < TAB.N && performance.now() - t0 < budgetMs) { TAB.vals[TAB.n] = lambda(TAB.x0 + TAB.n * TAB.h, TAB.psi, TAB.th); TAB.n++; }
   if (state.core) while (TABM.n < TABM.N && performance.now() - t0 < budgetMs) { TABM.vals[TABM.n] = coreBm(TABM.x0 + TABM.n * TABM.h, TAB.psi, TAB.th); TABM.n++; }
 }
-function tabEval(x, T = TAB) {
+function tabEval(x, T) {
+  if (T === undefined) T = TAB;
   const u = (x - T.x0) / T.h, f = T.vals; if (u < 1 || u > T.N - 3) return null;
   const i = Math.floor(u), t = u - i, t2 = t * t, t3 = t2 * t;
   const f0 = f[i], f1 = f[i + 1], m0 = (f[i + 1] - f[i - 1]) / 2, m1 = (f[i + 2] - f[i]) / 2;
   return [(2 * t3 - 3 * t2 + 1) * f0 + (t3 - 2 * t2 + t) * m0 + (-2 * t3 + 3 * t2) * f1 + (t3 - t2) * m1,
     ((6 * t2 - 6 * t) * f0 + (3 * t2 - 4 * t + 1) * m0 + (-6 * t2 + 6 * t) * f1 + (3 * t2 - 2 * t) * m1) / T.h];
 }
-
-/* =====================================================================
-   SIMULATION STEP
-   Circuit: coil, meter and battery in series.
-     L dI/dt = V_battery + EMF - R I,   EMF = -dLambda/dt from the magnet
-   Magnet: driven when swinging or parked. When you drag it, it rides a
-   spring to your cursor and feels the coil force G I, with G = dLambda/ds.
-   ===================================================================== */
 function simulate(dt) {
   const sT0 = state.sTargetPrev, sT1 = state.sTarget; state.sTargetPrev = sT1;
   if (state.dragging) state.vTarget += ((sT1 - sT0) / dt - state.vTarget) * Math.min(1, dt / 0.05); else state.vTarget = 0;
-  // the coil angle follows the slider, but waits while the magnet is in the way
   const w = 8, e = state.thetaTarget - state.theta;
   let thDotC = state.thetaDot + (w * w * e - 2 * w * state.thetaDot) * dt, thNew = state.theta + thDotC * dt;
   state.coilWaiting = false;
   if (Math.abs(thNew - state.theta) > 1e-9 && collides(state.s, state.psi, thNew)) { thNew = state.theta; thDotC = 0; state.coilWaiting = Math.abs(e) > 0.01; }
   state.thetaDot = thDotC;
   const th0 = state.theta, thDot = (thNew - th0) / dt; state.theta = thNew;
-  // magnet flip, driven over 0.8 s
   if (state.flip) {
     const f = state.flip; f.t += dt; const x = Math.min(1, f.t / f.dur);
     state.psi = f.from + (f.to - f.from) * x * x * (3 - 2 * x); state.psiDot = (f.to - f.from) * 6 * x * (1 - x) / f.dur;
     if (x >= 1) { state.psi = ((f.to + PI) % (2 * PI) + 2 * PI) % (2 * PI) - PI; state.psiDot = 0; state.flip = null; }
   }
-  // swing range shrinks to stay clear of a turned coil
   const sw = state.swing;
   if (state.mode === 'swing') {
     const [lo, hi] = swingRange(), k = Math.min(1, dt / 0.6);
@@ -585,21 +564,19 @@ function simulate(dt) {
   const GthF = Math.abs(thDot) > 1e-6 ? (lambda(sM, psiM, thM + 1e-3) - lambda(sM, psiM, thM - 1e-3)) / 2e-3 : 0;
   const GpsiF = Math.abs(state.psiDot) > 1e-6 ? (lambda(sM, psiM + 1e-3, thM) - lambda(sM, psiM - 1e-3, thM)) / 2e-3 : 0;
   const Eo = -(GthF * thDot + GpsiF * state.psiDot);
-  // iron core: applied field from the magnet, averaged over the rod, and its slope
   if (state.corePending !== state.core && (!state.corePending || !collides(state.s, state.psi, state.theta, true))) setCoreNow(state.corePending);
   const useM = state.core && useT && TABM.n === TABM.N;
   let BmF = 0, BmdF = 0;
   if (state.core && !useM) { BmF = coreBm(sM, psiM, thM); BmdF = (coreBm(sM + 1e-3, psiM, thM) - coreBm(sM - 1e-3, psiM, thM)) / 2e-3; }
-  const coreTerms = (xm, Gs, I) => {   // effective slope, inductance and the iron's own pull on the magnet
+  const coreTerms = (xm, Gs, I) => {
     if (!state.core) return [Gs, coil.L, 0, 0];
     let Bm = BmF, Bmd = BmdF; if (useM) { const r = tabEval(xm, TABM); if (r) { Bm = r[0]; Bmd = r[1]; } }
     const jl = core.chiE * (Bm + core.beta * I);
     if (Math.abs(jl) < IRON.Bs) return [Gs + core.K * core.chiE * Bmd, coil.L + core.Ladd, core.V / MU0 * core.chiE * Bm * Bmd, Bm];
-    return [Gs, coil.L, core.V / MU0 * Math.sign(jl) * IRON.Bs * Bmd, Bm];   // saturated rod
+    return [Gs, coil.L, core.V / MU0 * Math.sign(jl) * IRON.Bs * Bmd, Bm];
   };
   let Bmlast = 0, F0 = 0;
-
-  const m = magnetMass(), Rt = coil.R + R_METER, L = coil.L, n = 8, h2 = dt / n, w0 = 30, V = state.V;
+  const m = magnetMass(), Rt = coil.R + R_METER, n = 8, h2 = dt / n, w0 = 30, V = state.V;
   let I = state.I, v = state.v, x = state.s, emf = 0, Gs = GsF, Geff = GsF;
   const samples = [];
   for (let k = 0; k < n; k++) {
@@ -646,15 +623,7 @@ function setSwing(on) {
   $('swing').setAttribute('aria-pressed', on); $('swing').querySelector('span').textContent = on ? 'Swinging' : 'Swing';
 }
 
-/* =====================================================================
-   FIELD LINES
-   With the battery off, the coil's own field is under 3 percent of the
-   magnet's, so the lines are the magnet's exact field, traced once and
-   carried with it. With a stronger coil current, the combined field of
-   magnet plus coil is traced live in 3D, a few lines per frame.
-   ===================================================================== */
 const NL = 32, GOLD = PI * (3 - Math.sqrt(5)), LG0 = Math.log10(3e-4), LG1 = Math.log10(1.3);
-// Viridis colormap on a log scale of |B|, from 0.3 mT to 1.3 T. The color bar uses the same stops.
 const CMAP = [[0, 0x44, 0x01, 0x54], [0.25, 0x3b, 0x52, 0x8b], [0.5, 0x21, 0x91, 0x8c], [0.75, 0x5e, 0xc9, 0x62], [1, 0xfd, 0xe7, 0x25]];
 const bT = (B) => Math.min(1, Math.max(0, (Math.log10(B + 1e-12) - LG0) / (LG1 - LG0)));
 function ramp(t, out, o) {
@@ -662,7 +631,7 @@ function ramp(t, out, o) {
   const a = CMAP[i - 1], b = CMAP[i], f = Math.min(1, Math.max(0, (t - a[0]) / (b[0] - a[0])));
   out[o] = (a[1] + (b[1] - a[1]) * f) / 255; out[o + 1] = (a[2] + (b[2] - a[2]) * f) / 255; out[o + 2] = (a[3] + (b[3] - a[3]) * f) / 255;
 }
-const lineColor = (B, out, o) => { ramp(0.1 + 0.9 * bT(B), out, o); }; // lift the floor so weak lines stay visible
+const lineColor = (B, out, o) => { ramp(0.1 + 0.9 * bT(B), out, o); };
 const seedRadii = equalFluxRadii(r => magnetField(r, 0, MAGNET.a, MAGNET.b, MAGNET.Br)[1], MAGNET.a * 0.9999, NL).radii;
 
 class TubeSet {
@@ -677,7 +646,6 @@ class TubeSet {
     this.arrows = new THREE.InstancedMesh(new THREE.ConeGeometry(0.075, 0.27, 8), new THREE.MeshBasicMaterial({ color: 0xf2efe8 }), 900);
     this.arrows.frustumCulled = false; this.arrows.count = 0;
   }
-  // lines: [{ p: [x,y,z,...] scene units, b: [|B|...], closed }]
   set(lines) {
     let nv = 0, ni = 0, na = 0; const P = this.pos, C = this.col, X = this.idx, r = this.r;
     const M = new THREE.Matrix4(), q = new THREE.Quaternion(), up = new THREE.Vector3(0, 1, 0), tv = new THREE.Vector3(), pv = new THREE.Vector3(), one = new THREE.Vector3(1, 1, 1);
@@ -688,7 +656,6 @@ class TubeSet {
         const a = Math.max(0, i - 1), b = Math.min(n - 1, i + 1);
         let tx = p[b * 3] - p[a * 3], ty = p[b * 3 + 1] - p[a * 3 + 1], tz = p[b * 3 + 2] - p[a * 3 + 2];
         const tl = Math.hypot(tx, ty, tz) || 1; tx /= tl; ty /= tl; tz /= tl;
-        // carry the normal along the line so the tube does not twist
         const d = nx * tx + ny * ty + nz * tz; nx -= d * tx; ny -= d * ty; nz -= d * tz;
         let nl = Math.hypot(nx, ny, nz);
         if (nl < 1e-3) { if (Math.abs(tx) < 0.9) { nx = 0; ny = -tz; nz = ty; } else { nx = tz; ny = 0; nz = -tx; } nl = Math.hypot(nx, ny, nz); }
@@ -710,13 +677,12 @@ class TubeSet {
       }
     }
     this.geo.setDrawRange(0, ni);
-    for (const at of ['position', 'color']) { const A = this.geo.attributes[at]; A.needsUpdate = true; A.clearUpdateRanges && A.clearUpdateRanges(); }
+    for (const at of ['position', 'color']) { const A = this.geo.attributes[at]; A.needsUpdate = true; if (A.clearUpdateRanges) A.clearUpdateRanges(); }
     this.geo.index.needsUpdate = true;
     this.arrows.count = na; this.arrows.instanceMatrix.needsUpdate = true;
   }
 }
 
-// magnet only lines, in the magnet's own frame
 function buildRigidLines() {
   const a = MAGNET.a, b = MAGNET.b, F = (r, z) => magnetField(r, z, a, b, MAGNET.Br);
   const hFn = (r, z) => { const d = Math.hypot(Math.max(Math.abs(Math.abs(r) - a), 0), Math.max(Math.abs(z) - b, 0)); return Math.min(Math.max(0.05 * Math.max(d, 0.002), 1.5e-4), 0.02 * Math.hypot(r, z) + 1e-3, 4e-3); };
@@ -728,8 +694,6 @@ function buildRigidLines() {
   });
   vis.rigid.set(lines);
 }
-
-// combined field in world coordinates
 function Bworld(px, py, pz, sn, out) {
   const m = sn.m, dx = px - sn.ms, z = dx * m[0] + py * m[1] + pz * m[2];
   const rx = dx - z * m[0], ry = py - z * m[1], rz = pz - z * m[2], rho = Math.hypot(rx, ry, rz);
@@ -770,7 +734,6 @@ function traceDir(x0, y0, z0, sign, sn, maxSteps) {
     dir(x + h / 2 * k[1][0], y + h / 2 * k[1][1], z + h / 2 * k[1][2], k[2]);
     dir(x + h * k[2][0], y + h * k[2][1], z + h * k[2][2], k[3]);
     x += h / 6 * (k[0][0] + 2 * k[1][0] + 2 * k[2][0] + k[3][0]); y += h / 6 * (k[0][1] + 2 * k[1][1] + 2 * k[2][1] + k[3][1]); z += h / 6 * (k[0][2] + 2 * k[1][2] + 2 * k[2][2] + k[3][2]);
-    // did it pass through the magnet's midplane inside the magnet?
     const m = sn.m, dz = (x - sn.ms) * m[0] + y * m[1] + z * m[2], side = dz < 0 ? -1 : 1;
     if (prevSide && side !== prevSide && Math.hypot(x - sn.ms - dz * m[0], y - dz * m[1], z - dz * m[2]) < MAGNET.a) throughMag = true;
     prevSide = side;
@@ -783,7 +746,7 @@ function traceDir(x0, y0, z0, sign, sn, maxSteps) {
 }
 function traceSeed(seed, sn) {
   const f = traceDir(seed[0], seed[1], seed[2], 1, sn, 900);
-  if (seed[3] === 'coil' && f.throughMag) return null;       // already drawn from a magnet seed
+  if (seed[3] === 'coil' && f.throughMag) return null;
   let p = f.p, bb = f.bb;
   if (!f.closed) {
     const bk = traceDir(seed[0], seed[1], seed[2], -1, sn, 900), np = [], nb = [];
@@ -793,7 +756,6 @@ function traceSeed(seed, sn) {
   for (let i = 0; i < p.length; i++) p[i] *= S;
   return { p, b: bb, closed: f.closed };
 }
-// Strength map: |B| on the horizontal plane through the track, same colormap, alpha rising with strength.
 class FieldMap {
   constructor(W, H, wx, wz) {
     this.W = W; this.H = H; this.wx = wx; this.wz = wz; this.data = new Uint8Array(W * H * 4);
@@ -801,11 +763,10 @@ class FieldMap {
     this.mesh = new THREE.Mesh(new THREE.PlaneGeometry(wx * S, wz * S).rotateX(-PI / 2), new THREE.MeshBasicMaterial({ map: this.tex, transparent: true, depthWrite: false, side: THREE.DoubleSide }));
     this.mesh.renderOrder = 1; this.row = 0; this.job = null;
   }
-  // fill rows with fn(x, z) -> |B|; returns true when the whole map is done
   fill(fn, budgetMs) {
     const t0 = performance.now(), c = [0, 0, 0], D = this.data;
     while (this.row < this.H && performance.now() - t0 < budgetMs) {
-      const j = this.row, z = (0.5 - (j + 0.5) / this.H) * this.wz; // texture row 0 sits at +z after the plane rotation
+      const j = this.row, z = (0.5 - (j + 0.5) / this.H) * this.wz;
       for (let i = 0; i < this.W; i++) {
         const x = ((i + 0.5) / this.W - 0.5) * this.wx, t = bT(fn(x, z)), o = (j * this.W + i) * 4;
         ramp(t, c, 0); D[o] = c[0] * 255; D[o + 1] = c[1] * 255; D[o + 2] = c[2] * 255; D[o + 3] = 200 * Math.pow(t, 1.6);
@@ -836,7 +797,6 @@ function updateFieldLines() {
     vis.rigid.mesh.visible = vis.rigid.arrows.visible = L; vis.live.mesh.visible = vis.live.arrows.visible = false;
     vis.rigidMap.mesh.visible = Mp; vis.liveMap.mesh.visible = false; return;
   }
-  // live strength map, a few rows per frame
   if (Mp) {
     if (!FL.mapSn) { const sn = snapshot(); if (sn.key !== FL.mapKey) { FL.mapSn = sn; vis.liveMap.row = 0; } }
     if (FL.mapSn) { const sn = FL.mapSn, B = [0, 0, 0];
@@ -851,7 +811,7 @@ function updateFieldLines() {
     FL.job = { sn, seeds, i: 0, lines: [] };
   }
   const J = FL.job, t0 = performance.now();
-  while (J.i < J.seeds.length && performance.now() - t0 < 7) { const L = traceSeed(J.seeds[J.i++], J.sn); if (L) J.lines.push(L); }
+  while (J.i < J.seeds.length && performance.now() - t0 < 7) { const Ln = traceSeed(J.seeds[J.i++], J.sn); if (Ln) J.lines.push(Ln); }
   if (J.i >= J.seeds.length) {
     vis.live.set(J.lines); FL.doneKey = J.sn.key; FL.job = null;
     if (FL.mode !== 'traced') { FL.mode = 'traced'; }
@@ -860,17 +820,6 @@ function updateFieldLines() {
   if (!L) { vis.live.mesh.visible = vis.live.arrows.visible = vis.rigid.mesh.visible = vis.rigid.arrows.visible = false; }
 }
 
-/* =====================================================================
-   FALLING THROUGH A TUBE
-   The tube wall is split into 120 rings, 2.5 mm tall. Each ring has its
-   resistance, its self inductance, and a mutual inductance to every other
-   ring (Maxwell's formula for coaxial loops). The magnet's flux through a
-   ring comes from the same exact magnet model. Each substep solves, together,
-     (L/h + R) I' = L I / h - G v'      (all ring currents)
-     m v' = m v - h m g + h G . I'       (the magnet)
-   with G_k = dPhi_k/dy. The field of the eddy currents is about one percent
-   of the magnet's field near the wall, so the drawn lines show the magnet only.
-   ===================================================================== */
 const TUBES = {
   cu: { sym: 'Cu', nm: 'Copper', rho: 1.68e-8, color: 0xc27a45, metal: 1 },
   al: { sym: 'Al', nm: 'Aluminium', rho: 2.65e-8, color: 0xb9c0c8, metal: 1 },
@@ -880,31 +829,28 @@ const TUBES = {
 };
 const TUBE = { ri: 0.007, len: 0.30, hr: 0.0025, N: 120, top: 0.15, start: 0.19, floor: -0.215 };
 const tube = { mat: 'cu', t: 0.0015, y: TUBE.start, v: 0, phase: 'held', I: new Float64Array(TUBE.N), dirty: true, tIn: null, tOut: null, tDrop: 0, ySpring: 0 };
-const mutualLoops = (a, b, d) => { const m = 4 * a * b / ((a + b) * (a + b) + d * d), [K, E] = ellipKE(m), k = Math.sqrt(m); return MU0 * Math.sqrt(a * b) * ((2 / k - k) * K - 2 / k * E); };
+const mutualLoops = (a, b, d) => { const m = 4 * a * b / ((a + b) * (a + b) + d * d), KE = ellipKE(m), K = KE[0], E = KE[1], k = Math.sqrt(m); return MU0 * Math.sqrt(a * b) * ((2 / k - k) * K - 2 / k * E); };
 function buildTube() {
   const N = TUBE.N, rm = TUBE.ri + tube.t / 2, T = TUBES[tube.mat];
   tube.rm = rm; tube.z = new Float64Array(N); for (let k = 0; k < N; k++) tube.z[k] = -TUBE.len / 2 + (k + 0.5) * TUBE.hr;
   tube.cond = isFinite(T.rho);
   tube.Rk = tube.cond ? T.rho * 2 * PI * rm / (tube.t * TUBE.hr) : Infinity;
-  const gmd = 0.2235 * (tube.t + TUBE.hr); tube.Ls = MU0 * rm * (Math.log(8 * rm / gmd) - 2);   // thin rectangular ring
+  const gmd = 0.2235 * (tube.t + TUBE.hr); tube.Ls = MU0 * rm * (Math.log(8 * rm / gmd) - 2);
   const Mrow = new Float64Array(N); Mrow[0] = tube.Ls; for (let k = 1; k < N; k++) Mrow[k] = mutualLoops(rm, rm, k * TUBE.hr);
   tube.Mrow = Mrow;
-  // magnet flux through a ring at axial offset d, as a table
   const gl = gaussLegendre(40), M = MAGNET.Br / MU0, D0 = -0.25, dz = 5e-4, P = new Float64Array(1001);
   for (let i = 0; i <= 1000; i++) { const d = D0 + i * dz; let f = 0; for (let j = 0; j < 40; j++) f += gl.w[j] * MAGNET.b * M * mutualLoops(MAGNET.a, rm, d - gl.x[j] * MAGNET.b); P[i] = f; }
   tube.P = { vals: P, x0: D0, h: dz, N: 1001 };
-  // (L/h + R) inverse for the substep length used below
   const h = 1 / 480; tube.h = h;
   if (tube.cond) {
     const A = new Float64Array(N * N), Ai = new Float64Array(N * N);
     for (let i = 0; i < N; i++) for (let j = 0; j < N; j++) { A[i * N + j] = Mrow[Math.abs(i - j)] / h + (i === j ? tube.Rk : 0); Ai[i * N + j] = i === j ? 1 : 0; }
-    for (let c = 0; c < N; c++) {   // Gauss Jordan; the matrix is symmetric and diagonally dominant
+    for (let c = 0; c < N; c++) {
       const d = A[c * N + c]; for (let j = 0; j < N; j++) { A[c * N + j] /= d; Ai[c * N + j] /= d; }
       for (let r = 0; r < N; r++) if (r !== c) { const f = A[r * N + c]; if (f) for (let j = 0; j < N; j++) { A[r * N + j] -= f * A[c * N + j]; Ai[r * N + j] -= f * Ai[c * N + j]; } }
     }
     tube.Ai = Ai;
   }
-  // quasi static terminal speed at mid tube: m g = v * sum G^2 / R
   let sg = 0; if (tube.cond) for (let k = 0; k < N; k++) { const g = tabEval(tube.z[k], tube.P); if (g) sg += g[1] * g[1] / tube.Rk; }
   tube.vTerm = tube.cond ? magnetMass() * 9.81 / sg : Infinity;
   tube.I.fill(0); tube.dirty = false;
@@ -924,11 +870,10 @@ function simulateTube(dt) {
   for (let s = 0; s < n; s++) {
     let y = tube.y, v = tube.v;
     if (tube.phase === 'held' || tube.phase === 'landed') { v = 0; }
-    // magnet flux slope for every ring at the midpoint of this substep
     const ym = y + v * h / 2;
     for (let k = 0; k < N; k++) { const r = tabEval(tube.z[k] - ym, tube.P); G[k] = r ? -sig * r[1] : 0; }
     let ext = -m * g, Gw = 0, Gu = 0;
-    if (tube.phase === 'drag') { const w0 = 30, yT = sT0 + (sT1 - sT0) * s / n; ext = m * w0 * w0 * (yT - y) + 2 * m * w0 * (state.vTarget - v); }   // your hand also carries the weight
+    if (tube.phase === 'drag') { const w0 = 30, yT = sT0 + (sT1 - sT0) * s / n; ext = m * w0 * w0 * (yT - y) + 2 * m * w0 * (state.vTarget - v); }
     if (tube.cond && tube.phase !== 'held' && tube.phase !== 'landed') {
       for (let i = 0; i < N; i++) { let a = 0; for (let j = 0; j < N; j++) a += Mr[i > j ? i - j : j - i] * I[j]; rhs[i] = a / h; }
       for (let i = 0; i < N; i++) { let a = 0, b = 0; const o = i * N; for (let j = 0; j < N; j++) { a += Ai[o + j] * rhs[j]; b += Ai[o + j] * G[j]; } w[i] = a; u[i] = b; Gw += G[i] * a; Gu += G[i] * b; }
@@ -940,7 +885,6 @@ function simulateTube(dt) {
     y += v * h;
     if (y <= TUBE.floor + MAGNET.b && tube.phase === 'fall') { y = TUBE.floor + MAGNET.b; v = 0; tube.phase = 'landed'; }
     if (tube.phase === 'drag') y = Math.max(TUBE.floor + MAGNET.b, Math.min(0.26, y));
-    // transit timing through the tube
     if (tube.phase === 'fall') { if (tube.tIn === null && y - MAGNET.b < TUBE.top) tube.tIn = state.t + (s + 1) * h; if (tube.tOut === null && y + MAGNET.b < -TUBE.top) tube.tOut = state.t + (s + 1) * h; }
     tube.y = y; tube.v = v;
     samples.push([state.t + (s + 1) * h, -v, F]);
@@ -948,15 +892,11 @@ function simulateTube(dt) {
   tube.F = F;
   let heat = 0, imax = 0; for (let i = 0; i < N; i++) { heat += I[i] * I[i] * tube.Rk; if (Math.abs(I[i]) > Math.abs(imax)) imax = I[i]; }
   tube.heat = tube.cond ? heat : 0; tube.imax = imax;
-  // the ring just below the magnet's lower end, for the meter
   const kb = Math.max(0, Math.min(N - 1, Math.floor((tube.y - MAGNET.b - 0.004 + TUBE.len / 2) / TUBE.hr)));
   tube.iBelow = I[kb];
   state.samples = samples; state.t += dt;
 }
 
-/* =====================================================================
-   SCENE
-   ===================================================================== */
 let renderer, scene, camera, magnetGroup, coilGroup, tubeGroup;
 const vis = {};
 function textSprite(text, color, size) {
@@ -965,7 +905,8 @@ function textSprite(text, color, size) {
   const tex = new THREE.CanvasTexture(c); tex.colorSpace = THREE.SRGBColorSpace;
   const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: tex, transparent: true, depthTest: false })); sp.scale.set(size, size, 1); sp.renderOrder = 10; return sp;
 }
-function labelSprite(text, size, color = '#9a968c') {
+function labelSprite(text, size, color) {
+  if (color === undefined) color = '#9a968c';
   const c = document.createElement('canvas'), g = c.getContext('2d'), font = '500 44px Archivo, Arial, sans-serif'; g.font = font;
   const w = Math.ceil(g.measureText(text).width) + 24; c.width = w; c.height = 64; g.font = font; g.fillStyle = color; g.textBaseline = 'middle'; g.fillText(text, 12, 34);
   const tex = new THREE.CanvasTexture(c); tex.colorSpace = THREE.SRGBColorSpace;
@@ -1000,7 +941,7 @@ function initScene() {
   magnetGroup = new THREE.Group(); scene.add(magnetGroup);
   const half = (color, sign) => {
     const g = new THREE.CylinderGeometry(MAGNET.a * S, MAGNET.a * S, MAGNET.b * S, 48, 1); g.rotateZ(-PI / 2); g.translate(sign * MAGNET.b * S / 2, 0, 0);
-    const mesh = new THREE.Mesh(g, new THREE.MeshPhysicalMaterial({ color, metalness: 0.15, roughness: 0.32, clearcoat: 0.6, clearcoatRoughness: 0.25, transparent: true, opacity: 0.62, depthWrite: false }));
+    const mesh = new THREE.Mesh(g, new THREE.MeshPhysicalMaterial({ color: color, metalness: 0.15, roughness: 0.32, clearcoat: 0.6, clearcoatRoughness: 0.25, transparent: true, opacity: 0.62, depthWrite: false }));
     mesh.renderOrder = 2; magnetGroup.add(mesh);
   };
   half(0xc9463d, 1); half(0x3b6fc9, -1);
@@ -1017,14 +958,12 @@ function initScene() {
   magnetGroup.add(nS, sS); vis.magLabels = [nS, sS];
   vis.pick = new THREE.Mesh(new THREE.CylinderGeometry(MAGNET.a * S * 1.7, MAGNET.a * S * 1.7, MAGNET.b * S * 2.3, 16).rotateZ(-PI / 2), new THREE.MeshBasicMaterial({ visible: false }));
   magnetGroup.add(vis.pick);
-  // force on the magnet from the coil
   const fa = new THREE.Group(), fm = new THREE.MeshBasicMaterial({ color: 0xf2f5f8 });
   const shaft = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.06, 1, 8).rotateZ(-PI / 2).translate(0.5, 0, 0), fm);
   const head = new THREE.Mesh(new THREE.ConeGeometry(0.2, 0.5, 12).rotateZ(-PI / 2), fm);
-  fa.add(shaft, head); scene.add(fa); vis.force = { g: fa, shaft, head };
+  fa.add(shaft, head); scene.add(fa); vis.force = { g: fa, shaft: shaft, head: head };
   vis.forceLabel = { push: labelSprite('push', 0.5, '#f2f5f8'), pull: labelSprite('pull', 0.5, '#f2f5f8') }; scene.add(vis.forceLabel.push, vis.forceLabel.pull);
 
-  // field lines: magnet only set rides with the magnet, live set lives in the world
   vis.rigid = new TubeSet(40000, 0.03); magnetGroup.add(vis.rigid.mesh, vis.rigid.arrows);
   vis.live = new TubeSet(70000, 0.03); scene.add(vis.live.mesh, vis.live.arrows); vis.live.mesh.visible = vis.live.arrows.visible = false;
   buildRigidLines();
@@ -1042,38 +981,32 @@ function rebuildCoilVisuals() {
   const rIn = BOBBIN.rIn * S, rOut = coil.rOut * S, hl = BOBBIN.halfLen * S, fl = BOBBIN.flange * S, bore = BOBBIN.bore * S;
   const wind = new THREE.LatheGeometry([new THREE.Vector2(rIn, -hl), new THREE.Vector2(rOut, -hl), new THREE.Vector2(rOut, hl), new THREE.Vector2(rIn, hl)], 96).rotateZ(-PI / 2);
   const c = document.createElement('canvas'); c.width = 8; c.height = 256; const g = c.getContext('2d'), turns = Math.max(4, coil.perLayer);
-  for (let i = 0; i < 256; i++) { const vv = 150 + 80 * Math.sin((i / 256 * turns * 3) % 1 * PI); g.fillStyle = `rgb(${vv},${vv},${vv})`; g.fillRect(0, i, 8, 1); }
+  for (let i = 0; i < 256; i++) { const vv = 150 + 80 * Math.sin((i / 256 * turns * 3) % 1 * PI); g.fillStyle = 'rgb(' + vv + ',' + vv + ',' + vv + ')'; g.fillRect(0, i, 8, 1); }
   const bump = new THREE.CanvasTexture(c); bump.wrapS = bump.wrapT = THREE.RepeatWrapping;
   coilGroup.add(new THREE.Mesh(wind, new THREE.MeshPhysicalMaterial({ color: WIRES[state.wire].color, metalness: WIRES[state.wire].metal, roughness: 0.33, bumpMap: bump, bumpScale: 0.6, clearcoat: 0.4, clearcoatRoughness: 0.3 })));
   const acrylic = new THREE.MeshPhysicalMaterial({ color: 0xdfe8f2, roughness: 0.12, transparent: true, opacity: 0.2, depthWrite: false, side: THREE.DoubleSide });
   const bp = [[bore, -hl - fl], [rOut + 0.15, -hl - fl], [rOut + 0.15, -hl], [rIn, -hl], [rIn, hl], [rOut + 0.15, hl], [rOut + 0.15, hl + fl], [bore, hl + fl], [bore, -hl - fl]].map(q => new THREE.Vector2(q[0], q[1]));
   const bob = new THREE.Mesh(new THREE.LatheGeometry(bp, 96).rotateZ(-PI / 2), acrylic); bob.renderOrder = 3; coilGroup.add(bob);
-  // glow: how much of the magnet's field passes through the coil
   vis.glowMat = new THREE.MeshBasicMaterial({ color: 0x35b779, transparent: true, opacity: 0, side: THREE.DoubleSide, depthWrite: false, blending: THREE.AdditiveBlending });
   const glow = new THREE.Mesh(new THREE.CircleGeometry(bore * 0.98, 64).rotateY(PI / 2), vis.glowMat); vis.glow = glow; glow.renderOrder = 4; coilGroup.add(glow);
-  // current direction chevrons around the outside of the winding
   vis.chev = new THREE.InstancedMesh(new THREE.ConeGeometry(0.13, 0.4, 10), new THREE.MeshBasicMaterial({ color: 0xffd9b0 }), 24);
   vis.chev.frustumCulled = false; coilGroup.add(vis.chev); vis.chevPhase = vis.chevPhase || 0; vis.chevR = rOut + 0.32;
   vis.coilPoleP = textSprite('N', '#ffd9d4', 0.85); vis.coilPoleM = textSprite('S', '#d6e3ff', 0.85); coilGroup.add(vis.coilPoleP, vis.coilPoleM);
   vis.coilPoleX = Math.max(hl + fl, IRON.h * S * (state.core ? 1 : 0)) + 0.75;
-  // laminated soft iron rod
   const lc = document.createElement('canvas'); lc.width = 256; lc.height = 8; const lg = lc.getContext('2d');
-  for (let i = 0; i < 256; i++) { const vv = (i % 8 < 1) ? 90 : 170 + 20 * Math.sin(i * 0.9); lg.fillStyle = `rgb(${vv},${vv},${vv})`; lg.fillRect(i, 0, 1, 8); }
+  for (let i = 0; i < 256; i++) { const vv = (i % 8 < 1) ? 90 : 170 + 20 * Math.sin(i * 0.9); lg.fillStyle = 'rgb(' + vv + ',' + vv + ',' + vv + ')'; lg.fillRect(i, 0, 1, 8); }
   const lt = new THREE.CanvasTexture(lc); lt.wrapS = lt.wrapT = THREE.RepeatWrapping;
   vis.coreMesh = new THREE.Mesh(new THREE.CylinderGeometry(IRON.rc * S, IRON.rc * S, 2 * IRON.h * S, 48, 1).rotateZ(-PI / 2),
     new THREE.MeshPhysicalMaterial({ color: 0x6b6f74, metalness: 0.85, roughness: 0.42, bumpMap: lt, bumpScale: 0.4 }));
   vis.coreMesh.visible = state.core; coilGroup.add(vis.coreMesh);
   vis.glowRef = Math.abs(innerTurnFlux(0, 0, 0));
 }
-
 function rebuildTubeVisuals() {
   while (tubeGroup.children.length) { const o = tubeGroup.children.pop(); o.traverse(c => { if (c.geometry) c.geometry.dispose(); }); }
   const T = TUBES[tube.mat], ri = TUBE.ri * S, ro = (TUBE.ri + tube.t) * S, hl = TUBE.len / 2 * S;
-  // cut away: only the back half of the wall is drawn, so you can see inside
   const prof = [[ri, -hl], [ro, -hl], [ro, hl], [ri, hl], [ri, -hl]].map(q => new THREE.Vector2(q[0], q[1]));
   const mat = new THREE.MeshPhysicalMaterial({ color: T.color, metalness: T.metal, roughness: T.metal ? 0.35 : 0.6, side: THREE.DoubleSide, transparent: !T.metal, opacity: T.metal ? 1 : 0.55 });
   tubeGroup.add(new THREE.Mesh(new THREE.LatheGeometry(prof, 64, PI, PI), mat));
-  // eddy current bands on the inner wall, one per ring
   const pts = []; for (let i = 0; i <= 32; i++) { const t = PI + PI * i / 32; pts.push(new THREE.Vector3((ri - 0.03) * Math.sin(t), 0, (ri - 0.03) * Math.cos(t))); }
   const band = new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), 32, TUBE.hr * S * 0.36, 4, false);
   vis.bands = new THREE.InstancedMesh(band, new THREE.MeshBasicMaterial({ color: 0xffffff }), TUBE.N); vis.bands.frustumCulled = false;
@@ -1081,25 +1014,21 @@ function rebuildTubeVisuals() {
   for (let k = 0; k < TUBE.N; k++) { M.makeTranslation(0, (-TUBE.len / 2 + (k + 0.5) * TUBE.hr) * S, 0); vis.bands.setMatrixAt(k, M); vis.bands.setColorAt(k, c0); }
   tubeGroup.add(vis.bands);
   vis.ringArrows = new THREE.InstancedMesh(new THREE.ConeGeometry(0.13, 0.36, 10), new THREE.MeshBasicMaterial({ color: 0xf2efe8 }), 60); vis.ringArrows.count = 0; vis.ringArrows.frustumCulled = false; tubeGroup.add(vis.ringArrows);
-  // vertical ruler beside the tube, 1 cm ticks
   const tk = [], zr = -(ro + 1.1);
   for (let y = -21; y <= 20; y++) { const l = y % 5 === 0 ? 0.8 : 0.35; tk.push(0, y, zr, 0, y, zr - l); } tk.push(0, -21, zr, 0, 20, zr);
   const tg = new THREE.BufferGeometry(); tg.setAttribute('position', new THREE.Float32BufferAttribute(tk, 3)); tubeGroup.add(new THREE.LineSegments(tg, new THREE.LineBasicMaterial({ color: 0x6d6a63 })));
   for (let y = -20; y <= 20; y += 5) { const l = labelSprite(y + ' cm', 0.55); l.position.set(0, y, zr - 1.9); l.material.depthTest = true; tubeGroup.add(l); }
   const pad = new THREE.Mesh(new THREE.CylinderGeometry(2.2, 2.2, 0.4, 40), new THREE.MeshStandardMaterial({ color: 0x2b2a27, roughness: 0.9 })); pad.position.y = TUBE.floor * S - 0.2; tubeGroup.add(pad);
-  // free body diagram on the magnet: weight down, magnetic drag up, drawn to the same scale
-  const arrow = (color, label) => { const g = new THREE.Group(), m = new THREE.MeshBasicMaterial({ color });
+  const arrow = (color, label) => { const g = new THREE.Group(), m = new THREE.MeshBasicMaterial({ color: color });
     const sh = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.06, 1, 8).translate(0, 0.5, 0), m), hd = new THREE.Mesh(new THREE.ConeGeometry(0.2, 0.5, 12), m);
-    const lb = labelSprite(label, 0.5, '#e9e6df'); g.add(sh, hd, lb); tubeGroup.add(g); return { g, sh, hd, lb }; };
+    const lb = labelSprite(label, 0.5, '#e9e6df'); g.add(sh, hd, lb); tubeGroup.add(g); return { g: g, sh: sh, hd: hd, lb: lb }; };
   vis.fbd = { w: arrow(0xe9e6df, 'weight'), d: arrow(0x35b779, 'drag') };
 }
 function updateTubeVisuals(dt) {
   coilGroup.visible = false; tubeGroup.visible = true; vis.bench.forEach(o => o.visible = false); vis.force.g.visible = vis.forceLabel.push.visible = vis.forceLabel.pull.visible = false;
   magnetGroup.position.set(0, tube.y * S, 0); magnetGroup.rotation.set(0, 0, tube.up ? PI / 2 : -PI / 2);
-  // the camera follows the magnet down the tube
   const ty = Math.max(TUBE.floor * S + 4, Math.min(TUBE.start * S, tube.y * S)); cam.target.y += (ty - cam.target.y) * Math.min(1, dt * 4);
   updateFieldLines();
-  // band colors: yellow for counterclockwise seen from above, violet for clockwise, brightness with current
   const imax = Math.max(1e-6, ...Array.from(tube.I, Math.abs)), c = new THREE.Color(), cp = new THREE.Color(0xfde725), cn = new THREE.Color(0xb388ff), c0 = new THREE.Color(0x2a2926);
   const M = new THREE.Matrix4(), q = new THREE.Quaternion(), p = new THREE.Vector3(), one = new THREE.Vector3(1, 1, 1), upv = new THREE.Vector3(0, 1, 0), dir = new THREE.Vector3();
   let na = 0; const ref = Math.max(imax, 0.2);
@@ -1129,7 +1058,6 @@ function updateVisuals(dt) {
   const fade = (d) => 1 - Math.min(1, Math.max(0, (d - 0.75) / 0.17));
   const alongM = Math.abs(vd.x * Math.cos(state.psi) - vd.z * Math.sin(state.psi)), alongC = Math.abs(vd.x * Math.cos(state.theta) - vd.z * Math.sin(state.theta));
   vis.magLabels.forEach(l => l.material.opacity = fade(alongM));
-  // coil poles: positive current makes north on the +x face of the coil
   const Ia = Math.abs(state.I), on = Ia > 1e-3, nC = coilAxis(state.theta);
   vis.coilPoleP.visible = vis.coilPoleM.visible = Math.abs(state.V) >= 0.5 || coilMomentRatio() > 0.02;
   vis.coilPoleP.position.set(state.I >= 0 ? vis.coilPoleX : -vis.coilPoleX, 0.9, coil.rOut * S + 0.2);
@@ -1142,7 +1070,6 @@ function updateVisuals(dt) {
     for (let i = 0; i < 24; i++) { const t = vis.chevPhase + 2 * PI * i / 24; p.set(0, vis.chevR * Math.cos(t), vis.chevR * Math.sin(t)); tn.set(0, -Math.sin(t) * sg, Math.cos(t) * sg); q.setFromUnitVectors(up, tn); M.compose(p, q, one); vis.chev.setMatrixAt(i, M); }
     vis.chev.instanceMatrix.needsUpdate = true;
   }
-  // force arrow: length grows with the log of the force
   const F = state.force, fa = vis.force, show = Math.abs(F) > 0.005;
   fa.g.visible = show; vis.forceLabel.push.visible = vis.forceLabel.pull.visible = false;
   if (show) {
@@ -1154,9 +1081,6 @@ function updateVisuals(dt) {
   }
 }
 
-/* =====================================================================
-   CAMERA and POINTER
-   ===================================================================== */
 const cam = { az: 0.62, el: 0.36, r: 32, target: new THREE.Vector3(0, 0, 0), anim: null };
 function placeCamera() {
   const t = cam.target, r = cam.r * Math.max(1, Math.pow(1.3 / camera.aspect, 1.0));
@@ -1164,7 +1088,7 @@ function placeCamera() {
 }
 function flyTo(az, el, r) {
   let d = ((az - cam.az + PI) % (2 * PI) + 2 * PI) % (2 * PI) - PI;
-  cam.anim = { from: { az: cam.az, el: cam.el, r: cam.r }, to: { az: cam.az + d, el, r }, t: 0, dur: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0.01 : 0.8 };
+  cam.anim = { from: { az: cam.az, el: cam.el, r: cam.r }, to: { az: cam.az + d, el: el, r: r }, t: 0, dur: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0.01 : 0.8 };
 }
 function setView(name) {
   document.querySelectorAll('.views button').forEach(b => b.setAttribute('aria-pressed', b.dataset.view === name));
@@ -1189,7 +1113,7 @@ function initPointer() {
   const trackPoint = (rr) => { const o = rr.origin, d = rr.direction, c = state.exp === 'tube' ? 'y' : 'x', a = 1 - d[c] * d[c]; return a < 1e-6 ? null : (o[c] - d[c] * o.dot(d)) / a / S; };
   el.addEventListener('pointerdown', (e) => {
     el.setPointerCapture(e.pointerId); pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
-    if (pointers.size === 2) { const [p, q] = [...pointers.values()]; pinch = Math.hypot(p.x - q.x, p.y - q.y); mode = 'pinch'; return; }
+    if (pointers.size === 2) { const pq = [...pointers.values()]; pinch = Math.hypot(pq[0].x - pq[1].x, pq[0].y - pq[1].y); mode = 'pinch'; return; }
     rayAt(e);
     if (ray.intersectObject(vis.pick, false).length && !state.flip) {
       mode = 'magnet'; el.classList.add('dragging'); state.dragging = true; state.vTarget = 0;
@@ -1200,7 +1124,7 @@ function initPointer() {
   });
   el.addEventListener('pointermove', (e) => {
     if (!pointers.has(e.pointerId)) return; pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
-    if (mode === 'pinch' && pointers.size === 2) { const [p, q] = [...pointers.values()], d = Math.hypot(p.x - q.x, p.y - q.y); cam.r = Math.min(80, Math.max(6, cam.r * pinch / d)); pinch = d; return; }
+    if (mode === 'pinch' && pointers.size === 2) { const pq = [...pointers.values()], d = Math.hypot(pq[0].x - pq[1].x, pq[0].y - pq[1].y); cam.r = Math.min(80, Math.max(6, cam.r * pinch / d)); pinch = d; return; }
     if (mode === 'magnet') { const s = trackPoint(rayAt(e)); if (s !== null) state.sTarget = state.exp === 'tube' ? Math.max(-0.2, Math.min(0.26, s + vis.dragOffset)) : Math.max(-TRACK, Math.min(TRACK, s + vis.dragOffset)); }
     else if (mode === 'orbit' && last) { cam.az -= (e.clientX - last.x) * 0.006; cam.el = Math.max(-1.45, Math.min(1.53, cam.el + (e.clientY - last.y) * 0.005)); document.querySelectorAll('.views button').forEach(b => b.setAttribute('aria-pressed', 'false')); }
     last = { x: e.clientX, y: e.clientY };
@@ -1210,12 +1134,10 @@ function initPointer() {
   el.addEventListener('wheel', (e) => { e.preventDefault(); cam.r = Math.min(80, Math.max(6, cam.r * Math.exp(e.deltaY * 0.0012))); }, { passive: false });
 }
 
-/* =====================================================================
-   SCOPE, METER, CAPTION
-   ===================================================================== */
 const scope = { buf: [], win: 5, eR: 0.01, iR: 0.001, hold: 0, u1: 'V', u2: 'A' };
 function nice(x) { const e = Math.pow(10, Math.floor(Math.log10(x))), f = x / e; return (f <= 1 ? 1 : f <= 2 ? 2 : f <= 5 ? 5 : 10) * e; }
-function fmt(x, unit, dig = 3) {
+function fmt(x, unit, dig) {
+  if (dig === undefined) dig = 3;
   if (!isFinite(x)) return '–'; if (Math.abs(x) < 1e-11) return '0 ' + unit;
   const a = Math.abs(x), pre = [[1e-9, 'n'], [1e-6, 'µ'], [1e-3, 'm'], [1, ''], [1e3, 'k']];
   let p = pre[0]; for (const q of pre) if (a >= q[0] * 0.9995) p = q;
@@ -1234,7 +1156,6 @@ function drawScope() {
   const wE = nice(Math.max(me * 1.15, 1e-3)), wI = nice(Math.max(mi * 1.15, 1e-4));
   if (wE > scope.eR || (now - scope.hold > 2 && wE < scope.eR)) { scope.eR = wE; scope.hold = now; }
   if (wI > scope.iR || (now - scope.hold > 2 && wI < scope.iR)) scope.iR = wI;
-  // phosphor screen with divisions
   g.fillStyle = cssv('--screen'); g.beginPath(); g.moveTo(L, T); g.lineTo(L + pw - 8, T); g.lineTo(L + pw, T + 8); g.lineTo(L + pw, T + ph); g.lineTo(L + 8, T + ph); g.lineTo(L, T + ph - 8); g.closePath(); g.fill();
   g.strokeStyle = 'rgba(200,196,186,0.09)'; g.lineWidth = 1;
   for (let k = 1; k < 4; k++) { const y = T + ph * k / 4; g.beginPath(); g.moveTo(L, y); g.lineTo(L + pw, y); g.stroke(); }
@@ -1280,7 +1201,7 @@ function drawLam() {
   for (let x = -0.15; x <= 0.1501; x += 0.05) { g.beginPath(); g.moveTo(X(x), T); g.lineTo(X(x), T + ph); g.stroke(); g.textAlign = 'center'; g.fillText(Math.round(x * 100), X(x), T + ph + 13); }
   g.fillText('magnet position x, cm', L + pw / 2, T + ph + 27);
   if (TAB.n < TAB.N || TAB.key !== tabKey()) { g.textAlign = 'center'; g.fillText('computing Λ(x)', L + pw / 2, T + ph / 2); return; }
-  const withCore = state.core && TABM.n === TABM.N;   // total flux linkage with the iron magnetized by the magnet alone
+  const withCore = state.core && TABM.n === TABM.N;
   const mk = TAB.key + '|' + state.core; if (vis.maskKey !== mk) { vis.mask = new Uint8Array(TAB.N); for (let i = 0; i < TAB.N; i++) vis.mask[i] = collides(TAB.x0 + i * TAB.h, TAB.psi, TAB.th) ? 0 : 1; vis.maskKey = mk; }
   const lamAt = (i) => TAB.vals[i] + (withCore ? core.K * coreJ(TABM.vals[i], 0) : 0);
   let mx = 0; for (let i = 0; i < TAB.N; i++) if (vis.mask[i]) mx = Math.max(mx, Math.abs(lamAt(i)));
@@ -1290,7 +1211,6 @@ function drawLam() {
   g.beginPath(); let pen = false; for (let i = 0; i < TAB.N; i++) { if (!vis.mask[i]) { pen = false; continue; } const x = X(TAB.x0 + i * TAB.h), y = Y(lamAt(i)); pen ? g.lineTo(x, y) : g.moveTo(x, y); pen = true; }
   for (let i = 0; i < TAB.N; i++) if (!vis.mask[i]) { g.fillStyle = 'rgba(128,128,120,0.14)'; g.fillRect(X(TAB.x0 + i * TAB.h) - 1, T, pw / 300 + 2, ph); }
   g.strokeStyle = cssv('--ch3') || ink; g.lineWidth = 1.6; g.stroke();
-  // tangent at the magnet: its slope times the speed gives the EMF from motion
   const e = tabEval(state.s); if (!e) return;
   const em = withCore ? tabEval(state.s, TABM) : null, Gs = state.Gs, lam0 = e[0] + (em ? core.K * coreJ(em[0], 0) : 0), x0 = X(state.s), y0 = Y(lam0), dx = 0.03; e[0] = lam0;
   g.beginPath(); g.moveTo(X(state.s - dx), Y(e[0] - Gs * dx)); g.lineTo(X(state.s + dx), Y(e[0] + Gs * dx)); g.strokeStyle = c1; g.lineWidth = 2; g.stroke();
@@ -1298,16 +1218,16 @@ function drawLam() {
   g.fillStyle = ink; g.beginPath(); g.arc(x0, y0, 3.5, 0, 2 * PI); g.fill();
   const emfM = -Gs * state.v;
   g.textAlign = 'left'; g.fillStyle = c1; const tx = L + 8;
-  g.fillText(`slope ${fmt(Gs, 'Wb/m', 2)}`, tx, T + 11); g.fillStyle = soft;
-  g.fillText(`EMF = −slope × ${state.v.toFixed(2)} m/s = ${fmt(emfM, 'V', 2)}`, tx, T + 24);
+  g.fillText('slope ' + fmt(Gs, 'Wb/m', 2), tx, T + 11); g.fillStyle = soft;
+  g.fillText('EMF = −slope × ' + state.v.toFixed(2) + ' m/s = ' + fmt(emfM, 'V', 2), tx, T + 24);
 }
 const meter = { range: 0.01 };
 function initMeter() {
   const cx = 105, cy = 140, R = 88, a0 = -60 * PI / 180, a1 = 60 * PI / 180, pt = (a, r) => [cx + r * Math.sin(a), cy - r * Math.cos(a)];
-  const [x0, y0] = pt(a0, R), [x1, y1] = pt(a1, R);
-  $('arc').setAttribute('d', `M ${x0} ${y0} A ${R} ${R} 0 0 1 ${x1} ${y1}`);
-  let t = ''; for (let i = -5; i <= 5; i++) { const a = i / 5 * a1, [p, q] = pt(a, R), [u, v] = pt(a, R - (i % 5 === 0 ? 12 : 6)); t += `<line x1="${p}" y1="${q}" x2="${u}" y2="${v}"/>`; }
-  for (let i = -50; i <= 50; i += 1) { if (i % 10 === 0) continue; const a = i / 50 * a1, [p, q] = pt(a, R), [u, v] = pt(a, R - 3); t += `<line x1="${p}" y1="${q}" x2="${u}" y2="${v}" opacity="0.5"/>`; }
+  const xy0 = pt(a0, R), xy1 = pt(a1, R);
+  $('arc').setAttribute('d', 'M ' + xy0[0] + ' ' + xy0[1] + ' A ' + R + ' ' + R + ' 0 0 1 ' + xy1[0] + ' ' + xy1[1]);
+  let t = ''; for (let i = -5; i <= 5; i++) { const a = i / 5 * a1, pq = pt(a, R), uv = pt(a, R - (i % 5 === 0 ? 12 : 6)); t += '<line x1="' + pq[0] + '" y1="' + pq[1] + '" x2="' + uv[0] + '" y2="' + uv[1] + '"/>'; }
+  for (let i = -50; i <= 50; i += 1) { if (i % 10 === 0) continue; const a = i / 50 * a1, pq = pt(a, R), uv = pt(a, R - 3); t += '<line x1="' + pq[0] + '" y1="' + pq[1] + '" x2="' + uv[0] + '" y2="' + uv[1] + '" opacity="0.5"/>'; }
   $('ticks').innerHTML = t;
 }
 function drawMeter() {
@@ -1320,19 +1240,19 @@ function drawMeter() {
   document.querySelectorAll('.meter text').forEach(t => t.setAttribute('fill', soft)); document.querySelector('.meter circle').setAttribute('fill', ink);
   $('tmin').textContent = fmt(-meter.range, 'A', 1); $('tmax').textContent = fmt(meter.range, 'A', 1);
 }
-function valUnit(x, unit, dig) { const t = fmt(x, unit, dig), k = t.lastIndexOf(' '); return `${t.slice(0, k)}<small>${t.slice(k + 1)}</small>`; }
+function valUnit(x, unit, dig) { const t = fmt(x, unit, dig), k = t.lastIndexOf(' '); return t.slice(0, k) + '<small>' + t.slice(k + 1) + '</small>'; }
 function updateTubeReadouts() {
   const mg = magnetMass() * 9.81, F = tube.F || 0, ff = Math.sqrt(2 * 0.30 / 9.81);
   $('kEmf').textContent = 'Speed'; $('vEmf').innerHTML = valUnit(Math.abs(tube.v), 'm/s', 3);
-  $('xEmf').textContent = tube.cond ? `terminal about ${fmt(tube.vTerm, 'm/s', 2)}` : 'no drag: free fall';
-  $('kCur').textContent = 'Magnetic drag'; $('vCur').innerHTML = valUnit(F, 'N', 3); $('xCur').textContent = `${Math.round(F / mg * 100)}% of the weight, ${fmt(mg, 'N', 3)}`;
+  $('xEmf').textContent = tube.cond ? 'terminal about ' + fmt(tube.vTerm, 'm/s', 2) : 'no drag: free fall';
+  $('kCur').textContent = 'Magnetic drag'; $('vCur').innerHTML = valUnit(F, 'N', 3); $('xCur').textContent = Math.round(F / mg * 100) + '% of the weight, ' + fmt(mg, 'N', 3);
   $('hot').classList.remove('on');
-  $('kB').textContent = 'Largest ring current'; $('vB').innerHTML = valUnit(Math.abs(tube.imax || 0), 'A', 3); $('xB').textContent = tube.cond ? `ring resistance ${fmt(tube.Rk, 'Ω', 3)}` : 'plastic does not conduct';
+  $('kB').textContent = 'Largest ring current'; $('vB').innerHTML = valUnit(Math.abs(tube.imax || 0), 'A', 3); $('xB').textContent = tube.cond ? 'ring resistance ' + fmt(tube.Rk, 'Ω', 3) : 'plastic does not conduct';
   const tr = tube.tIn !== null && tube.tOut !== null ? tube.tOut - tube.tIn : null;
-  $('kF').textContent = 'Heat in the tube'; $('vF').innerHTML = valUnit(tube.heat || 0, 'W', 3); $('xF').textContent = tr !== null ? `${tr.toFixed(2)} s through the tube` : 'transit time pending';
-  const T = TUBES[tube.mat], spec = [['Tube', `${T.nm}, ID 14 mm, wall ${(tube.t * 1000).toFixed(1)} mm`], ['Resistivity', isFinite(T.rho) ? `${(T.rho * 1e9).toPrecision(3)} nΩ·m` : 'insulator'],
-    ['Length', '30 cm, 120 rings of 2.5 mm'], ['Ring L/R', tube.cond ? fmt(tube.Ls / tube.Rk, 's', 2) : 'none'], ['Magnet', `Ø 12 × 25 mm, ${(magnetMass() * 1000).toFixed(1)} g`], ['Free fall, 30 cm', `${ff.toFixed(2)} s from rest`]];
-  const sh = spec.map(r => `<dt>${r[0]}</dt><dd>${r[1]}</dd>`).join(''); if (sh !== vis.specHtml) { $('spec').innerHTML = sh; vis.specHtml = sh; }
+  $('kF').textContent = 'Heat in the tube'; $('vF').innerHTML = valUnit(tube.heat || 0, 'W', 3); $('xF').textContent = tr !== null ? tr.toFixed(2) + ' s through the tube' : 'transit time pending';
+  const T = TUBES[tube.mat], spec = [['Tube', T.nm + ', ID 14 mm, wall ' + (tube.t * 1000).toFixed(1) + ' mm'], ['Resistivity', isFinite(T.rho) ? (T.rho * 1e9).toPrecision(3) + ' nΩ·m' : 'insulator'],
+    ['Length', '30 cm, 120 rings of 2.5 mm'], ['Ring L/R', tube.cond ? fmt(tube.Ls / tube.Rk, 's', 2) : 'none'], ['Magnet', 'Ø 12 × 25 mm, ' + (magnetMass() * 1000).toFixed(1) + ' g'], ['Free fall, 30 cm', ff.toFixed(2) + ' s from rest']];
+  const sh = spec.map(r => '<dt>' + r[0] + '</dt><dd>' + r[1] + '</dd>').join(''); if (sh !== vis.specHtml) { $('spec').innerHTML = sh; vis.specHtml = sh; }
 }
 function updateReadouts() {
   if (state.exp === 'tube') { updateTubeReadouts(); return; }
@@ -1340,26 +1260,25 @@ function updateReadouts() {
   const Rt = coil.R + R_METER, Ib = state.V / Rt, Ii = state.I - Ib, P = state.I * state.I * coil.R;
   const F = state.force, toward = F * -Math.sign(state.s || -1) > 0;
   $('vEmf').innerHTML = valUnit(state.emf, 'V', 3); $('xEmf').textContent = 'flux ' + fmt(state.lam, 'Wb', 3);
-  $('vCur').innerHTML = valUnit(state.I, 'A', 3); $('xCur').textContent = state.V !== 0 ? `battery ${fmt(Ib, 'A', 2)}, induced ${fmt(Ii, 'A', 1)}` : `heat ${fmt(P, 'W', 2)}`;
+  $('vCur').innerHTML = valUnit(state.I, 'A', 3); $('xCur').textContent = state.V !== 0 ? 'battery ' + fmt(Ib, 'A', 2) + ', induced ' + fmt(Ii, 'A', 1) : 'heat ' + fmt(P, 'W', 2);
   $('hot').classList.toggle('on', P > 5); $('hot').textContent = fmt(P, 'W', 2) + ' hot';
-  $('vB').innerHTML = valUnit(vis.bPerAmp * state.I + (state.core ? magnetField(1e-9, 0, IRON.rc, IRON.h, state.J)[1] : 0), 'T', 3); $('xB').textContent = `${state.N} turns, ${fmt(coil.R, 'Ω', 3)}`;
+  $('vB').innerHTML = valUnit(vis.bPerAmp * state.I + (state.core ? magnetField(1e-9, 0, IRON.rc, IRON.h, state.J)[1] : 0), 'T', 3); $('xB').textContent = state.N + ' turns, ' + fmt(coil.R, 'Ω', 3);
   const wireLen = state.N * 2 * PI * coil.rMean, spec = [
-    ['Magnet', `Ø 12 × 25 mm, ${(magnetMass() * 1000).toFixed(1)} g`], ['Remanence', `${MAGNET.Br.toFixed(2)} T`],
-    ['Coil', `bore 30 mm, ${state.N} turns, ${coil.layers} layers`], ['Wire', `${WIRES[state.wire].sym}, Ø 0.5 mm, ${wireLen.toFixed(1)} m`],
-    ['Resistance', `${fmt(coil.R, 'Ω', 3)} + 1 Ω meter`], ['Inductance', state.core ? `${fmt(coil.L + core.Ladd, 'H', 3)} with core` : `${fmt(coil.L, 'H', 3)} (Wheeler)`], ['Time constant', fmt((coil.L + (state.core ? core.Ladd : 0)) / (coil.R + R_METER), 's', 2)]];
-  if (state.core) spec.push(['Iron core', `Ø 27 × 40 mm, N ${core.Nd.toFixed(3)}, χ eff ${core.chiE.toFixed(2)}`], ['Core magnetization', `J ${fmt(state.J, 'T', 2)} of 2 T`]);
-  const sh = spec.map(r => `<dt>${r[0]}</dt><dd>${r[1]}</dd>`).join(''); if (sh !== vis.specHtml) { $('spec').innerHTML = sh; vis.specHtml = sh; }
+    ['Magnet', 'Ø 12 × 25 mm, ' + (magnetMass() * 1000).toFixed(1) + ' g'], ['Remanence', MAGNET.Br.toFixed(2) + ' T'],
+    ['Coil', 'bore 30 mm, ' + state.N + ' turns, ' + coil.layers + ' layers'], ['Wire', WIRES[state.wire].sym + ', Ø 0.5 mm, ' + wireLen.toFixed(1) + ' m'],
+    ['Resistance', fmt(coil.R, 'Ω', 3) + ' + 1 Ω meter'], ['Inductance', state.core ? fmt(coil.L + core.Ladd, 'H', 3) + ' with core' : fmt(coil.L, 'H', 3) + ' (Wheeler)'], ['Time constant', fmt((coil.L + (state.core ? core.Ladd : 0)) / (coil.R + R_METER), 's', 2)]];
+  if (state.core) spec.push(['Iron core', 'Ø 27 × 40 mm, N ' + core.Nd.toFixed(3) + ', χ eff ' + core.chiE.toFixed(2)], ['Core magnetization', 'J ' + fmt(state.J, 'T', 2) + ' of 2 T']);
+  const sh = spec.map(r => '<dt>' + r[0] + '</dt><dd>' + r[1] + '</dd>').join(''); if (sh !== vis.specHtml) { $('spec').innerHTML = sh; vis.specHtml = sh; }
   $('vF').innerHTML = Math.abs(F) < 1e-4 ? '0<small>N</small>' : valUnit(Math.abs(F), 'N', 3); $('xF').textContent = Math.abs(F) < 1e-4 ? 'no force' : toward ? 'pull toward the coil' : 'push away from the coil';
 }
-// One plain sentence for what is happening right now
 function updateTubeCaption() {
   const mg = magnetMass() * 9.81, F = tube.F || 0, y = tube.y; let msg, tone = '';
   if (tube.phase === 'drag') { msg = 'Move it fast and the tube pushes back. Hold it still and nothing happens.'; tone = Math.abs(F) > 1e-3 ? 'live' : ''; }
-  else if (tube.phase === 'landed') { const tr = tube.tIn !== null && tube.tOut !== null ? tube.tOut - tube.tIn : null; msg = tr !== null ? `Landed. It took ${tr.toFixed(2)} s to pass the 30 cm tube.` : 'Landed. Press Drop to run it again.'; }
+  else if (tube.phase === 'landed') { const tr = tube.tIn !== null && tube.tOut !== null ? tube.tOut - tube.tIn : null; msg = tr !== null ? 'Landed. It took ' + tr.toFixed(2) + ' s to pass the 30 cm tube.' : 'Landed. Press Drop to run it again.'; }
   else if (y - MAGNET.b > TUBE.top) msg = 'Falling freely toward the tube.';
   else if (y + MAGNET.b < -TUBE.top) msg = 'Out of the tube and falling freely again.';
   else if (!tube.cond) msg = 'Plastic does not conduct, so no eddy currents slow the fall.';
-  else if (F > 0.9 * mg) { msg = `Terminal speed, ${fmt(Math.abs(tube.v), 'm/s', 2)}: eddy current drag balances the weight.`; tone = 'live'; }
+  else if (F > 0.9 * mg) { msg = 'Terminal speed, ' + fmt(Math.abs(tube.v), 'm/s', 2) + ': eddy current drag balances the weight.'; tone = 'live'; }
   else { msg = 'Eddy currents circle the tube above and below the magnet and push back on it.'; tone = 'live'; }
   $('status').textContent = msg; $('dot').className = 'led ' + tone;
 }
@@ -1372,8 +1291,8 @@ function updateCaption() {
   else if (state.core && state.V === 0 && Math.abs(state.emf) <= 1e-3 && Math.abs(state.F0) > 2e-3) { msg = 'The magnet magnetizes the iron core, and the iron pulls the magnet in.'; tone = 'warm'; }
   else if (state.V !== 0 && Math.abs(state.forceBatt) > 2e-3) {
     const nFacing = (Ib > 0) === (state.s * coilAxis(state.theta)[0] > 0), toward = state.forceBatt * -Math.sign(state.s || -1) > 0;
-    msg = `Electromagnet on: its ${nFacing ? 'north' : 'south'} pole faces the magnet, so it ${toward ? 'pulls it in' : 'pushes it away'}.`; tone = 'warm';
-  } else if (Math.abs(e) > 1e-3) { msg = `Flux ${rising ? 'rising' : 'falling'}, so ${fmt(Math.abs(e), 'V', 2)} is induced.`; tone = 'live'; }
+    msg = 'Electromagnet on: its ' + (nFacing ? 'north' : 'south') + ' pole faces the magnet, so it ' + (toward ? 'pulls it in' : 'pushes it away') + '.'; tone = 'warm';
+  } else if (Math.abs(e) > 1e-3) { msg = 'Flux ' + (rising ? 'rising' : 'falling') + ', so ' + fmt(Math.abs(e), 'V', 2) + ' is induced.'; tone = 'live'; }
   else if (Math.abs(Math.cos(state.theta)) < 0.25) msg = 'Coil side on: field crosses it both ways and cancels.';
   else if (state.V !== 0) { msg = 'Electromagnet on, but too far or too turned to pull the magnet.'; tone = 'warm'; }
   else if (Math.abs(state.v) > 0.02) msg = 'Magnet far away, so the flux barely changes.';
@@ -1381,9 +1300,6 @@ function updateCaption() {
   $('status').textContent = msg; $('dot').className = 'led ' + tone;
 }
 
-/* =====================================================================
-   UI and MAIN LOOP
-   ===================================================================== */
 const $ = (id) => document.getElementById(id);
 const ui = { toast(msg) { const t = $('toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(ui._t); ui._t = setTimeout(() => t.classList.remove('show'), 2600); } };
 function setTurns(N) {
@@ -1406,12 +1322,12 @@ function setExp(e) {
   document.querySelectorAll('[data-exp]').forEach(el => el.hidden = el.dataset.exp !== e);
   $('expCoil').setAttribute('aria-pressed', e === 'coil'); $('expTube').setAttribute('aria-pressed', e === 'tube');
   if (e === 'tube') {
-    scope.u1 = 'm/s'; scope.u2 = 'N'; $('capScope').textContent = 'CH1 falling speed, CH2 magnetic drag'; $('capLam').innerHTML = 'Fig. 3  Eddy current in each ring'; $('capLamR').textContent = 'opposite signs above and below';
+    scope.u1 = 'm/s'; scope.u2 = 'N'; $('capScope').textContent = 'CH1 falling speed, CH2 magnetic drag'; $('capLam').innerHTML = 'Fig. 3&nbsp; Eddy current in each ring'; $('capLamR').textContent = 'opposite signs above and below';
     $('vcapTxt').textContent = 'Magnet falling through a conducting tube, cut away to show the eddy currents'; $('mlabel').textContent = 'Eddy current, ring below magnet';
     if (tube.dirty) buildTube(); rebuildTubeVisuals(); dropMagnet(); setView('oblique');
-    state.show.map = false; $('showMap').setAttribute('aria-pressed', false);   // the map plane would hide the eddy bands
+    state.show.map = false; $('showMap').setAttribute('aria-pressed', false);
   } else {
-    scope.u1 = 'V'; scope.u2 = 'A'; $('capScope').textContent = 'CH1 induced EMF, CH2 induced current'; $('capLam').innerHTML = 'Fig. 3  Flux linkage Λ<span class="long"> against magnet position</span>'; $('capLamR').textContent = 'EMF = −slope × speed';
+    scope.u1 = 'V'; scope.u2 = 'A'; $('capScope').textContent = 'CH1 induced EMF, CH2 induced current'; $('capLam').innerHTML = 'Fig. 3&nbsp; Flux linkage Λ<span class="long"> against magnet position</span>'; $('capLamR').textContent = 'EMF = −slope × speed';
     $('vcapTxt').textContent = 'Field of the magnet and coil, horizontal plane through the axis'; $('mlabel').textContent = 'Galvanometer, coil current';
     state.dragging = false; setView('oblique');
   }
@@ -1433,11 +1349,10 @@ function setWire(k) {
   $('wireName').textContent = WIRES[k].nm + ' wire, 0.5 mm'; $('wireR').textContent = fmt(coil.R, 'Ω', 3);
 }
 function initUI() {
-  $('mats').innerHTML = Object.entries(MAGNETS).map(([k, m]) => `<button class="cell" data-k="${k}" title="${m.name}, remanence ${m.Br} T"><span class="z">${m.Br.toFixed(2)} T</span><span class="sym">${m.sym}</span><span class="nm">${m.nm}</span></button>`).join('');
-  $('wires').innerHTML = Object.entries(WIRES).map(([k, w]) => `<button class="cell" data-k="${k}" title="${w.nm}, resistivity ${(w.rho * 1e9).toPrecision(3)} nΩ·m"><span class="z">${w.rho * 1e9 >= 100 ? Math.round(w.rho * 1e9) : (w.rho * 1e9).toFixed(1)} nΩm</span><span class="sym">${w.sym}</span><span class="nm">${w.nm}</span></button>`).join('');
+  $('mats').innerHTML = Object.entries(MAGNETS).map(([k, m]) => '<button class="cell" data-k="' + k + '" title="' + m.name + ', remanence ' + m.Br + ' T"><span class="z">' + m.Br.toFixed(2) + ' T</span><span class="sym">' + m.sym + '</span><span class="nm">' + m.nm + '</span></button>').join('');
+  $('wires').innerHTML = Object.entries(WIRES).map(([k, w]) => '<button class="cell" data-k="' + k + '" title="' + w.nm + ', resistivity ' + (w.rho * 1e9).toPrecision(3) + ' nΩ·m"><span class="z">' + (w.rho * 1e9 >= 100 ? Math.round(w.rho * 1e9) : (w.rho * 1e9).toFixed(1)) + ' nΩm</span><span class="sym">' + w.sym + '</span><span class="nm">' + w.nm + '</span></button>').join('');
   document.querySelectorAll('#mats .cell').forEach(t => t.addEventListener('click', () => setMaterial(t.dataset.k)));
   document.querySelectorAll('#wires .cell').forEach(t => t.addEventListener('click', () => setWire(t.dataset.k)));
-  // ruler sliders: fill from the minimum, or from zero for the battery
   const fillRule = (el) => { const lo = +el.min, hi = +el.max, f = (v) => ((v - lo) / (hi - lo) * 100).toFixed(2) + '%', v = +el.value;
     if (el.classList.contains('bipolar')) { el.style.setProperty('--a', f(Math.min(0, v))); el.style.setProperty('--b', f(Math.max(0, v))); }
     else { el.style.setProperty('--a', '0%'); el.style.setProperty('--b', f(v)); } };
@@ -1448,12 +1363,11 @@ function initUI() {
   $('volt').addEventListener('input', e => { state.V = +e.target.value; $('voltOut').textContent = state.V === 0 ? 'off' : (state.V > 0 ? '+' : '') + state.V.toFixed(1) + ' V'; });
   $('angle').addEventListener('input', e => { state.thetaTarget = +e.target.value * PI / 180; $('angleOut').textContent = e.target.value + '°'; });
   $('turns').addEventListener('input', e => { setTurns(+e.target.value); $('wireR').textContent = fmt(coil.R, 'Ω', 3); });
-  for (const [id, k] of [['showLines', 'lines'], ['showMap', 'map']]) $(id).addEventListener('click', e => { state.show[k] = !state.show[k]; e.currentTarget.setAttribute('aria-pressed', state.show[k]); FL.mapKey = ''; });
+  [['showLines', 'lines'], ['showMap', 'map']].forEach(pair => { const id = pair[0], k = pair[1]; $(id).addEventListener('click', e => { state.show[k] = !state.show[k]; e.currentTarget.setAttribute('aria-pressed', state.show[k]); FL.mapKey = ''; }); });
   document.querySelectorAll('.views button').forEach(b => b.addEventListener('click', () => setView(b.dataset.view)));
   $('speedOut').textContent = '0.30 m/s'; $('voltOut').textContent = 'off'; $('angleOut').textContent = '0°'; $('turnsOut').textContent = state.N;
-  // color bar ticks at decades of |B|
-  $('bar').innerHTML = [[1, '1 T'], [0.1, '100 mT'], [0.01, '10 mT'], [0.001, '1 mT']].map(([b, l]) => `<span class="tk" style="left:${(bT(b) * 100).toFixed(1)}%">${l}</span>`).join('');
-  $('tubes').innerHTML = Object.entries(TUBES).map(([k, w]) => `<button class="cell" data-k="${k}" title="${w.nm}"><span class="z">${isFinite(w.rho) ? (w.rho * 1e9 >= 100 ? Math.round(w.rho * 1e9) : (w.rho * 1e9).toFixed(1)) + ' nΩm' : 'insulator'}</span><span class="sym">${w.sym}</span><span class="nm">${w.nm}</span></button>`).join('');
+  $('bar').innerHTML = [[1, '1 T'], [0.1, '100 mT'], [0.01, '10 mT'], [0.001, '1 mT']].map(pair => '<span class="tk" style="left:' + (bT(pair[0]) * 100).toFixed(1) + '%">' + pair[1] + '</span>').join('');
+  $('tubes').innerHTML = Object.entries(TUBES).map(([k, w]) => '<button class="cell" data-k="' + k + '" title="' + w.nm + '"><span class="z">' + (isFinite(w.rho) ? (w.rho * 1e9 >= 100 ? Math.round(w.rho * 1e9) : (w.rho * 1e9).toFixed(1)) + ' nΩm' : 'insulator') + '</span><span class="sym">' + w.sym + '</span><span class="nm">' + w.nm + '</span></button>').join('');
   document.querySelectorAll('#tubes .cell').forEach(t => t.addEventListener('click', () => { setTubeMat(t.dataset.k); dropMagnet(); }));
   $('wall').addEventListener('input', e => { tube.t = +e.target.value / 1000; $('wallOut').textContent = (+e.target.value).toFixed(1) + ' mm'; tube.dirty = true; });
   $('wall').addEventListener('change', () => { buildTube(); rebuildTubeVisuals(); setTubeMat(tube.mat); dropMagnet(); });
@@ -1478,30 +1392,29 @@ function frame(now) {
   for (const q of state.samples) scope.buf.push({ t: q[0], e: q[1], i: q[2] });
   while (scope.buf.length && scope.buf[0].t < state.t - scope.win) scope.buf.shift();
   drawScope(); drawMeter(); drawLam();
-  $('flip').setAttribute('aria-pressed', !!state.flip); $('clock').textContent = `t ${state.t.toFixed(1)} s   step 2.1 ms`;
+  $('flip').setAttribute('aria-pressed', !!state.flip); $('clock').textContent = 't ' + state.t.toFixed(1) + ' s   step 2.1 ms';
   if (state.exp === 'tube') $('drop').setAttribute('aria-pressed', tube.phase === 'fall');
   roT += dt; if (roT > 0.2) { roT = 0; updateReadouts(); updateCaption(); }
   renderer.render(scene, camera);
   requestAnimationFrame(frame);
 }
 function main() {
-  buildCoil(); initScene(); computeBPerAmp(); initPointer(); initUI(); initMeter();
-  fillTable(2000); setSwing(true);
-  new ResizeObserver(resize).observe($('view3d')); resize();
-  $('loading').remove(); updateReadouts(); updateCaption();
-  window.__bench = { state, tube, TUBE, core, IRON, simulateTube, dropMagnet, buildTube, setExp, setCore, setTubeMat, setMaterial, TAB, TABM, simulate, fillTable, updateVisuals, updateFieldLines, updateCaption, updateReadouts, setTurns, setSwing, flipMagnet, collides, lambda, FL, vis, cam, scope, coil: () => coil,
-    renderOnce: () => { placeCamera(); updateVisuals(1 / 60); drawScope(); drawMeter(); drawLam(); updateReadouts(); updateCaption(); renderer.render(scene, camera); }, pause: () => { window.__paused = true; } };
-  requestAnimationFrame(frame);
+  try {
+    buildCoil(); initScene(); computeBPerAmp(); initPointer(); initUI(); initMeter();
+    fillTable(2000); setSwing(true);
+    new ResizeObserver(resize).observe($('view3d')); resize();
+    const ld = $('loading'); if (ld) ld.remove();
+    updateReadouts(); updateCaption();
+    requestAnimationFrame(frame);
+  } catch (err) {
+    console.error(err);
+    const ld = $('loading');
+    if (ld) ld.textContent = 'Error: ' + (err && err.message ? err.message : err);
+    $('status').textContent = 'Startup error — see console (F12)';
+  }
 }
 requestAnimationFrame(main);
-
-/* Notes on method
-   Magnet field: exact solution for a uniformly magnetized cylinder (Derby and Olbert 2010).
-   Flux linkage: by reciprocity, a line integral of the coil's vector potential around the magnet's cross
-   sections, valid at any tilt or offset. Coil: N turns over the winding section, Gauss Legendre sampling.
-   Resistance from copper resistivity; inductance from Wheeler's multilayer formula.
-   Combined field lines: magnet field plus the coil's field from its present current, traced with RK4. */
+})();
 </script>
 </body>
 </html>
-
